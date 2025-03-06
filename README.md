@@ -4,13 +4,13 @@ This project report outlines the development and training of neural networks to 
 ## How to Run:
 \
 To run the server:
-`python .\src\server.py`\
+`python .\src\server.py`
 \
 All the possible options for the server are avaiable at interface.txt.
 
 To play with the trained model:
 \
-`python .\src\test.py`\
+`python .\src\test.py`
 \
 
 ### Supervised Learning:
