@@ -1,0 +1,155 @@
+JOINTS
+
+Index: 0
+Type:  Translation
+Values: -0.3 ... 0.3
+Description:
+  Forward-Backward Slider. Positive Values are forward.
+
+Index: 1
+Type:  Translation
+Values: -0.8 ... 0.8
+Description:
+  Left-Right Slider. Positive Values are to the right.
+
+
+Index: 2
+Type:  Rotation
+Values: Any
+Description:
+  Rotation around the vertical axis (Z). 
+
+Index: 3
+Type: Rotation
+Values: -pi/2 ... pi/2
+Description: 
+  Pitch of the first arm link.
+
+Index: 4
+Type: Rotation
+Values: Any
+Description:
+  Roll of the first arm link.
+
+Index: 5
+Type: Rotation
+Values: -pi*3/4 ... pi*3/4
+Description: 
+  Pitch of the second arm link.
+
+Index: 6
+Type: Rotation
+Values: Any
+Description:
+  Roll of the second arm link.
+
+Index: 7
+Type: Rotation
+Values: -pi*3/4 ... pi*3/4
+Description: 
+  Pitch of the third arm link.
+
+Index: 8
+Type: Rotation
+Values: Any
+Description:
+  Roll of the third arm link.
+
+
+Index: 9
+Type: Rotation
+Values: -pi*3/4 ... pi*3/4
+Description: 
+  Pitch of the paddle
+
+
+Index: 10
+Type: Rotation
+Values: Any
+Description:
+  Roll of the paddle
+
+===========================================================
+State list
+Index       Description
+0-10        Current joint positions
+11-13       Paddle center position (x,y,z)
+14-16       Paddle normal versor (x,y,z)
+17-19       Current ball position (x,y,z)
+20-22       Current ball velocity (x,y,z)
+23-25       Opponent paddle center position (x,y,z)
+26          Game waiting, cannot move (0=no, 1=yes)
+27          Game waiting for opponent service (0=no, 1=yes)
+28          Game playing (i.e., not waiting) (0=no, 1=yes)
+29          Ball in your half-field (0=no, 1=yes)
+30          Ball already touched your side of table (0=no, 1=yes)
+31          Ball already touched your robot (0=no, 1=yes)
+32          Ball in opponent half-field (0=no, 1=yes)
+33          Ball already touched opponent side of table (0=no, 1=yes)
+34          Your score
+35          Opponent score
+36          Simulation time
+
+=================================================================
+RULES
+If we call A and B the two players, a game is a sequence
+of segments that start with one of the players serving the 
+ball and lasts until one of the players is awarded a point,
+or the game time limit is reached. The players alternate
+in serving the ball (i.e., at each segment the ball is
+served by the player that did not serve it in the 
+previous one).
+
+Player A is awarded a point (and the game will continue
+with a new service of the ball) if one of the following
+combination of events arise:
+
+1. The ball hits the table in the half-field of Player B,
+   and after that, one of the following events happen before
+   the ball hits the robot of Player A or the table in the
+   half-field of Player A:
+   1a. The ball hits again the table in the half-field of Player B
+   1b. The ball hits TWICE the robot of Player B
+   1c. The ball hits the floor.
+   1d. The ball stops its motion.
+   1e. The ball goes very far away from the table.
+
+2. The ball hits the robot of Player B,
+   and after that, one of the following events happen before
+   the ball hits the robot of Player A or the table in the
+   half-field of Player A:
+   2a. The ball hits again the robot of Player B
+   2b. The ball hits the table in the half-field of Player B
+   2c. The ball hits the floor.
+   2d. The ball stops its motion.
+   2e. The ball goes very far away from the table.
+
+3. The ball hits the robot of Player B while it is 
+   still in the half-field of Player A.
+======================================================================
+SERVER COMMAND LINE OPTIONS
+
+-port <port>
+    Set the TCP port used for the server. The default is 9543
+-time <limit>  
+    Set a time limit for the game. <limit> can have the form secs
+    or mins:secs (examples: 172 or 2:52). The default is no limit.
+-score <limit>
+    Set a score limit for the game. The default is no limit.
+-noball
+    Plays a game where the ball is held in a fixed position; useful for
+    acquiring data about the kinematics of the robot.
+-sameserve
+    Plays a game where the serving player is not changed after each point;
+    useful for learning how to reply to service.
+-swap
+    Start the service with the second player instead of the first one.
+-dummy
+    Adds a dummy player, that only follows the x position of the ball.
+-auto
+    Adds an auto player
+-nogui
+    Disables the GUI.
+-font <ratio>
+    Scales the font size used for the text in the GUI by the real 
+    number <ratio>.

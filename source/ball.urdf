@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<robot name="pingpong-ball">
+<material name="ball">
+<color rgba="0.9 0.9 0.2 1"/>
+</material>
+
+<link name="ball">
+<visual>
+<origin xyz="0.0 0.0 0.04"/>
+<geometry>
+<sphere radius="0.04"/>
+</geometry>
+<material name="ball"/>
+</visual>
+
+<inertial>
+<origin xyz="0.0 0.0 0.04"/>
+<mass value="0.016"/>
+<inertia ixx="1.024e-05" iyy="1.024e-05" izz="1.024e-05"/>
+</inertial>
+
+<collision>
+<origin xyz="0.0 0.0 0.04"/>
+<geometry>
+<sphere radius="0.04"/>
+</geometry>
+</collision>
+</link>
+
+
+</robot>

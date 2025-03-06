@@ -1,0 +1,420 @@
+<?xml version="1.0"?>
+<robot name="pingpong-robot">
+<material name="base">
+<color rgba="0.7 0.5 0.5 1"/>
+</material>
+
+<material name="joint">
+<color rgba="0.8 0.2 0.2 1"/>
+</material>
+
+<material name="arm">
+<color rgba="0.9 0.9 0.6 1"/>
+</material>
+
+<material name="paddle">
+<color rgba="0.2 0.2 0.8 1"/>
+</material>
+
+<link name="la">
+<visual>
+<origin xyz="0.0 0.0 0.05"/>
+<geometry>
+<box size="2.0 1.0 0.1"/>
+</geometry>
+<material name="base"/>
+</visual>
+
+<inertial>
+<origin xyz="0.0 0.0 0.05"/>
+<mass value="0"/>
+<inertia ixx="0.0" iyy="0.0" izz="0.0"/>
+</inertial>
+
+</link>
+
+
+<link name="lb">
+<visual>
+<origin xyz="0.0 0.0 0.02"/>
+<geometry>
+<box size="2.0 0.4 0.04"/>
+</geometry>
+<material name="base"/>
+</visual>
+
+<inertial>
+<origin xyz="0.0 0.0 0.02"/>
+<mass value="1"/>
+<inertia ixx="0.013466666666666668" iyy="0.33346666666666663" izz="0.3466666666666667"/>
+</inertial>
+
+</link>
+
+
+<joint name="la-lb" type="prismatic">
+<parent link="la"/>
+<child link="lb"/>
+<origin xyz="0.0 0.0 0.1" rpy="0.0 0.0 0.0"/>
+<axis xyz="0 1 0"/>
+<limit lower="-0.3" upper="0.3"/>
+</joint>
+
+
+<link name="lc">
+<visual>
+<origin xyz="0.0 0.0 0.02"/>
+<geometry>
+<box size="0.4 0.4 0.04"/>
+</geometry>
+<material name="joint"/>
+</visual>
+
+<inertial>
+<origin xyz="0.0 0.0 0.02"/>
+<mass value="1"/>
+<inertia ixx="0.013466666666666668" iyy="0.013466666666666668" izz="0.026666666666666672"/>
+</inertial>
+
+<collision>
+<origin xyz="0.0 0.0 0.02"/>
+<geometry>
+<box size="0.4 0.4 0.04"/>
+</geometry>
+</collision>
+</link>
+
+
+<joint name="lb-lc" type="prismatic">
+<parent link="lb"/>
+<child link="lc"/>
+<origin xyz="0.0 0.0 0.04" rpy="0.0 0.0 0.0"/>
+<axis xyz="1 0 0"/>
+<limit lower="-0.8" upper="0.8"/>
+</joint>
+
+
+<link name="ld">
+<visual>
+<origin xyz="0.0 0.0 0.02"/>
+<geometry>
+<cylinder radius="0.13333333333333333" length="0.04"/>
+</geometry>
+<material name="base"/>
+</visual>
+
+<inertial>
+<origin xyz="0.0 0.0 0.02"/>
+<mass value="1"/>
+<inertia ixx="0.004577777777777777" iyy="0.004577777777777777" izz="0.008888888888888889"/>
+</inertial>
+
+<collision>
+<origin xyz="0.0 0.0 0.02"/>
+<geometry>
+<cylinder radius="0.13333333333333333" length="0.04"/>
+</geometry>
+</collision>
+</link>
+
+
+<joint name="lc-ld" type="continuous">
+<parent link="lc"/>
+<child link="ld"/>
+<origin xyz="0.0 0.0 0.04" rpy="0.0 0.0 0.0"/>
+<axis xyz="0 0 1"/>
+</joint>
+
+
+<link name="le">
+<visual>
+<origin xyz="0.0 0.0 1.0000000000287557e-07"/>
+<geometry>
+<sphere radius="0.06666666666666667"/>
+</geometry>
+<material name="joint"/>
+</visual>
+
+<inertial>
+<origin xyz="0.0 0.0 1.0000000000287557e-07"/>
+<mass value="1"/>
+<inertia ixx="0.0017777777777777779" iyy="0.0017777777777777779" izz="0.0017777777777777779"/>
+</inertial>
+
+<collision>
+<origin xyz="0.0 0.0 1.0000000000287557e-07"/>
+<geometry>
+<sphere radius="0.06666666666666667"/>
+</geometry>
+</collision>
+</link>
+
+
+<joint name="ld-le" type="revolute">
+<parent link="ld"/>
+<child link="le"/>
+<origin xyz="0.0 0.0 0.04" rpy="0.0 0.0 0.0"/>
+<axis xyz="1 0 0"/>
+<limit lower="-1.5707963267948966" upper="1.5707963267948966"/>
+</joint>
+
+
+<link name="arm1">
+<visual>
+<origin xyz="0.0 0.0 0.225"/>
+<geometry>
+<cylinder radius="0.039999999999999994" length="0.45"/>
+</geometry>
+<material name="arm"/>
+</visual>
+
+<inertial>
+<origin xyz="0.0 0.0 0.225"/>
+<mass value="1"/>
+<inertia ixx="0.017275" iyy="0.017275" izz="0.0007999999999999997"/>
+</inertial>
+
+<collision>
+<origin xyz="0.0 0.0 0.225"/>
+<geometry>
+<cylinder radius="0.039999999999999994" length="0.45"/>
+</geometry>
+</collision>
+</link>
+
+
+<joint name="r-joint1" type="continuous">
+<parent link="le"/>
+<child link="arm1"/>
+<origin xyz="0.0 0.0 2.0000000000575113e-07" rpy="0.0 0.0 0.0"/>
+<axis xyz="0 0 1"/>
+</joint>
+
+
+<link name="armj1">
+<visual>
+<origin xyz="0 0 1.0000000000287557e-07" rpy="0 1.5707963267948966 0"/>
+<geometry>
+<cylinder radius="0.06666666666666667" length="0.12"/>
+</geometry>
+<material name="joint"/>
+</visual>
+
+<inertial>
+<origin xyz="0 0 1.0000000000287557e-07" rpy="0 1.5707963267948966 0"/>
+<mass value="1"/>
+<inertia ixx="0.002311111111111111" iyy="0.0022222222222222222" izz="0.002311111111111111"/>
+</inertial>
+
+<collision>
+<origin xyz="0 0 1.0000000000287557e-07" rpy="0 1.5707963267948966 0"/>
+<geometry>
+<cylinder radius="0.06666666666666667" length="0.12"/>
+</geometry>
+</collision>
+</link>
+
+
+<joint name="p-joint1" type="revolute">
+<parent link="arm1"/>
+<child link="armj1"/>
+<origin xyz="0.0 0.0 0.45" rpy="0.0 0.0 0.0"/>
+<axis xyz="1 0 0"/>
+<limit lower="-2.356194490192345" upper="2.356194490192345"/>
+</joint>
+
+
+<link name="arm2">
+<visual>
+<origin xyz="0.0 0.0 0.18000000000000002"/>
+<geometry>
+<cylinder radius="0.039999999999999994" length="0.36000000000000004"/>
+</geometry>
+<material name="arm"/>
+</visual>
+
+<inertial>
+<origin xyz="0.0 0.0 0.18000000000000002"/>
+<mass value="1"/>
+<inertia ixx="0.011200000000000002" iyy="0.011200000000000002" izz="0.0007999999999999997"/>
+</inertial>
+
+<collision>
+<origin xyz="0.0 0.0 0.18000000000000002"/>
+<geometry>
+<cylinder radius="0.039999999999999994" length="0.36000000000000004"/>
+</geometry>
+</collision>
+</link>
+
+
+<joint name="r-joint2" type="continuous">
+<parent link="armj1"/>
+<child link="arm2"/>
+<origin xyz="0.0 0.0 2.0000000000575113e-07" rpy="0.0 0.0 0.0"/>
+<axis xyz="0 0 1"/>
+</joint>
+
+
+<link name="armj2">
+<visual>
+<origin xyz="0 0 1.0000000000287557e-07" rpy="0 1.5707963267948966 0"/>
+<geometry>
+<cylinder radius="0.06666666666666667" length="0.12"/>
+</geometry>
+<material name="joint"/>
+</visual>
+
+<inertial>
+<origin xyz="0 0 1.0000000000287557e-07" rpy="0 1.5707963267948966 0"/>
+<mass value="1"/>
+<inertia ixx="0.002311111111111111" iyy="0.0022222222222222222" izz="0.002311111111111111"/>
+</inertial>
+
+<collision>
+<origin xyz="0 0 1.0000000000287557e-07" rpy="0 1.5707963267948966 0"/>
+<geometry>
+<cylinder radius="0.06666666666666667" length="0.12"/>
+</geometry>
+</collision>
+</link>
+
+
+<joint name="p-joint2" type="revolute">
+<parent link="arm2"/>
+<child link="armj2"/>
+<origin xyz="0.0 0.0 0.36000000000000004" rpy="0.0 0.0 0.0"/>
+<axis xyz="1 0 0"/>
+<limit lower="-2.356194490192345" upper="2.356194490192345"/>
+</joint>
+
+
+<link name="arm3">
+<visual>
+<origin xyz="0.0 0.0 0.14400000000000002"/>
+<geometry>
+<cylinder radius="0.039999999999999994" length="0.28800000000000003"/>
+</geometry>
+<material name="arm"/>
+</visual>
+
+<inertial>
+<origin xyz="0.0 0.0 0.14400000000000002"/>
+<mass value="1"/>
+<inertia ixx="0.007312000000000001" iyy="0.007312000000000001" izz="0.0007999999999999997"/>
+</inertial>
+
+<collision>
+<origin xyz="0.0 0.0 0.14400000000000002"/>
+<geometry>
+<cylinder radius="0.039999999999999994" length="0.28800000000000003"/>
+</geometry>
+</collision>
+</link>
+
+
+<joint name="r-joint3" type="continuous">
+<parent link="armj2"/>
+<child link="arm3"/>
+<origin xyz="0.0 0.0 2.0000000000575113e-07" rpy="0.0 0.0 0.0"/>
+<axis xyz="0 0 1"/>
+</joint>
+
+
+<link name="armj3">
+<visual>
+<origin xyz="0 0 1.0000000000287557e-07" rpy="0 1.5707963267948966 0"/>
+<geometry>
+<cylinder radius="0.06666666666666667" length="0.12"/>
+</geometry>
+<material name="joint"/>
+</visual>
+
+<inertial>
+<origin xyz="0 0 1.0000000000287557e-07" rpy="0 1.5707963267948966 0"/>
+<mass value="1"/>
+<inertia ixx="0.002311111111111111" iyy="0.0022222222222222222" izz="0.002311111111111111"/>
+</inertial>
+
+<collision>
+<origin xyz="0 0 1.0000000000287557e-07" rpy="0 1.5707963267948966 0"/>
+<geometry>
+<cylinder radius="0.06666666666666667" length="0.12"/>
+</geometry>
+</collision>
+</link>
+
+
+<joint name="p-joint3" type="revolute">
+<parent link="arm3"/>
+<child link="armj3"/>
+<origin xyz="0.0 0.0 0.28800000000000003" rpy="0.0 0.0 0.0"/>
+<axis xyz="1 0 0"/>
+<limit lower="-2.356194490192345" upper="2.356194490192345"/>
+</joint>
+
+
+<link name="stick">
+<visual>
+<origin xyz="0.0 0.0 0.09333333333333332"/>
+<geometry>
+<cylinder radius="0.015" length="0.18666666666666665"/>
+</geometry>
+<material name="arm"/>
+</visual>
+
+<inertial>
+<origin xyz="0.0 0.0 0.09333333333333332"/>
+<mass value="1"/>
+<inertia ixx="0.002959953703703703" iyy="0.002959953703703703" izz="0.0001125"/>
+</inertial>
+
+<collision>
+<origin xyz="0.0 0.0 0.09333333333333332"/>
+<geometry>
+<cylinder radius="0.015" length="0.18666666666666665"/>
+</geometry>
+</collision>
+</link>
+
+
+<joint name="stick-joint" type="continuous">
+<parent link="armj3"/>
+<child link="stick"/>
+<origin xyz="0.0 0.0 2.0000000000575113e-07" rpy="0.0 0.0 0.0"/>
+<axis xyz="0 0 1"/>
+</joint>
+
+
+<link name="paddle">
+<visual>
+<origin xyz="0 0 0.13999999999999999" rpy="0 1.5707963267948966 0"/>
+<geometry>
+<cylinder radius="0.15" length="0.03"/>
+</geometry>
+<material name="paddle"/>
+</visual>
+
+<inertial>
+<origin xyz="0 0 0.13999999999999999" rpy="0 1.5707963267948966 0"/>
+<mass value="1"/>
+<inertia ixx="0.0057" iyy="0.01125" izz="0.0057"/>
+</inertial>
+
+<collision>
+<origin xyz="0 0 0.13999999999999999" rpy="0 1.5707963267948966 0"/>
+<geometry>
+<cylinder radius="0.15" length="0.03"/>
+</geometry>
+</collision>
+</link>
+
+
+<joint name="paddle-joint" type="fixed">
+<parent link="stick"/>
+<child link="paddle"/>
+<origin xyz="0.0 0.0 0.18666666666666665" rpy="0.0 0.0 0.0"/>
+</joint>
+
+
+</robot>
